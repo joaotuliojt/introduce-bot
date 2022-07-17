@@ -15,6 +15,7 @@ module.exports = {
         "import/prefer-default-export": "off",
         "no-underscore-dangle": "off",
         "no-unused-vars": "off",
+        "class-methods-use-this": "off",
         "import/extensions": [
             "error",
             "ignorePackages",

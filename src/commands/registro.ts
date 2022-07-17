@@ -1,5 +1,6 @@
 import { ICommand } from "wokcommands";
 import { modal } from "../components/MainModal";
+import { GetUser } from "../services/user/GetUser";
 
 export default {
   description:
@@ -7,11 +8,16 @@ export default {
   category: "Curriculo",
   slash: "both",
 
-  callback: ({ message, interaction }) => {
-    if (message) {
+  callback: async ({ message, interaction }) => {
+    const getUser = new GetUser();
+    const user = await getUser.execute({ id: Number(interaction.user.id) });
+    if (!user) {
       interaction.showModal(modal);
-      return;
+    } else {
+      interaction.reply({
+        content: "Perfil Discord já registrado em nosso banco de dados!",
+        ephemeral: true,
+      });
     }
-    interaction.showModal(modal);
   },
 } as ICommand;

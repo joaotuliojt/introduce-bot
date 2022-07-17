@@ -9,7 +9,7 @@ interface IRequest {
 }
 
 export class CreateUser {
-  static async execute({
+  async execute({
     id,
     github,
     linkedin,
