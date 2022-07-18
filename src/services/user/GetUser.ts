@@ -9,7 +9,7 @@ export class GetUser {
     const user = await User.findOne({ id });
 
     if (!user) {
-      throw new Error("User dont exists!");
+      return undefined;
     }
 
     return user;

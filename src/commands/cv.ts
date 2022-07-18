@@ -17,6 +17,13 @@ export default {
       const user = await getUser.execute({
         id: Number(userId),
       });
+      if (!user) {
+        interaction.reply({
+          content: "Usuário não encontrado",
+          ephemeral: true,
+        });
+        return;
+      }
       const embedGenerated = generateEmbedCv({
         name: user.name,
         resume: user.resume,

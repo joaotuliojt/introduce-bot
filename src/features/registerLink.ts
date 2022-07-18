@@ -1,36 +1,28 @@
 import { Client } from "discord.js";
 import WOKCommands from "wokcommands";
-import { CreateUser } from "../services/user/CreateUser";
+import { AddLink } from "../services/user/AddLink";
 
 export default (client: Client, instance: WOKCommands) => {
   client.on("interactionCreate", async (interaction) => {
     if (!interaction.isModalSubmit()) return;
 
-    if (interaction.customId === "register") {
+    if (interaction.customId === "links") {
       if (!interaction.isModalSubmit()) return;
 
-      const resume = interaction.fields.getTextInputValue("resume");
-      const title = interaction.fields.getTextInputValue("title");
-      const name = interaction.fields.getTextInputValue("name");
-      const linkedin = interaction.fields.getTextInputValue("linkedin");
+      const origin = interaction.fields.getTextInputValue("linkName");
+      const url = interaction.fields.getTextInputValue("linkUrl");
       const { id } = interaction.user;
-      const createUser = new CreateUser();
+      const addLink = new AddLink();
       try {
-        const user = await createUser.execute({
-          resume,
-          title,
-          linkedin,
-          name,
-          id: Number(id),
-        });
-
+        await addLink.execute({ id: Number(id), origin, url });
         interaction.reply({
-          content: `Olá ${user.name}, seus dados foram registrados com sucesso!`,
+          content: `Link adicionado com sucesso!`,
+          ephemeral: true,
         });
       } catch (error) {
-        console.log(error);
         interaction.reply({
-          content: "Você já tem um cadastro",
+          content: "Falha ao adicionar novo link!",
+          ephemeral: true,
         });
       }
     }

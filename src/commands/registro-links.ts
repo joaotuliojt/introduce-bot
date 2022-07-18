@@ -1,10 +1,9 @@
 import { ICommand } from "wokcommands";
-import { modal } from "../components/MainModal";
+import { modal } from "../components/LinksModal";
 import { GetUser } from "../services/user/GetUser";
 
 export default {
-  description:
-    "Registre seu currículo em nosso banco de dados e use em qualquer servidor no qual fui adicionado!",
+  description: "Registre seus links como Behance, GitHub etc.",
   category: "Curriculo",
   slash: "both",
 
@@ -14,12 +13,12 @@ export default {
       id: Number(interaction.user.id),
     });
     if (!user) {
-      interaction.showModal(modal);
-    } else {
       interaction.reply({
-        content: "Perfil Discord já registrado em nosso banco de dados!",
+        content: "Registre primeiro em nosso banco de dados com /registro!",
         ephemeral: true,
       });
+    } else {
+      interaction.showModal(modal);
     }
   },
 } as ICommand;

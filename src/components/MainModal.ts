@@ -7,30 +7,33 @@ const linkedinInput: any = new TextInputComponent()
   .setCustomId("linkedin")
   .setLabel("Seu linkedin:")
   .setMaxLength(45)
-  .setStyle("SHORT");
+  .setStyle("SHORT")
+  .setRequired(true);
 
 const nameInput: any = new TextInputComponent()
   .setCustomId("name")
   .setLabel("Seu nome:")
   .setMaxLength(30)
-  .setStyle("SHORT");
+  .setStyle("SHORT")
+  .setRequired(true);
 
-const githubInput: any = new TextInputComponent()
-  .setCustomId("github")
-  .setLabel("Seu github:")
-  .setMaxLength(45)
+const titleInput: any = new TextInputComponent()
+  .setCustomId("title")
+  .setLabel("Título de atuação")
+  .setRequired(true)
   .setStyle("SHORT");
 
 const resumeInput: any = new TextInputComponent()
   .setCustomId("resume")
   .setLabel("Digite um resumo sobre você:")
-  .setStyle("PARAGRAPH");
+  .setStyle("PARAGRAPH")
+  .setRequired(true);
 
 const nameRow = new MessageActionRow().addComponents(nameInput);
 const linkedinRow = new MessageActionRow().addComponents(linkedinInput);
-const githubRow = new MessageActionRow().addComponents(githubInput);
+const titleRow = new MessageActionRow().addComponents(titleInput);
 const resumeRow = new MessageActionRow().addComponents(resumeInput);
 
-modal.addComponents(nameRow, linkedinRow, githubRow, resumeRow);
+modal.addComponents(nameRow, linkedinRow, titleRow, resumeRow);
 
 export { modal };

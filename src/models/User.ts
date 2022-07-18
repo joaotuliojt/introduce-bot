@@ -1,5 +1,9 @@
 import mongoose, { Schema, Model, Document } from "mongoose";
 
+interface Link {
+  origin: string;
+  url: string;
+}
 export interface IUser extends Document {
   id: number;
   frontendStacks?: string[];
@@ -8,6 +12,8 @@ export interface IUser extends Document {
   github?: string;
   resume: string;
   name: string;
+  title: string;
+  links: Link[];
 }
 
 const UserSchema = new Schema<IUser>(
@@ -17,6 +23,16 @@ const UserSchema = new Schema<IUser>(
       type: Number,
       required: true,
     },
+    links: [
+      {
+        origin: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+    ],
     frontendStacks: {
       type: [String],
     },
@@ -33,6 +49,10 @@ const UserSchema = new Schema<IUser>(
       type: String,
     },
     name: {
+      type: String,
+      required: true,
+    },
+    title: {
       type: String,
       required: true,
     },
